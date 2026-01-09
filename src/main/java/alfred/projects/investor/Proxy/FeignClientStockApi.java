@@ -1,14 +1,14 @@
 package alfred.projects.investor.Proxy;
 
 import alfred.projects.investor.Model.WrapperTickerResponse;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-@org.springframework.cloud.openfeign.FeignClient(name = "stockApi",
-           url = "${stockData.baseUrl}"
+@FeignClient(name = "stockApi",
+        url = "${stockData.baseUrl}"
 )
-public interface FeignClient {
+public interface FeignClientStockApi {
 
     @GetMapping()
     WrapperTickerResponse obtainEODdata (@RequestParam (name = "symbols") String ticker,

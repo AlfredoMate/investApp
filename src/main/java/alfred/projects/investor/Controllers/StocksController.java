@@ -2,7 +2,7 @@ package alfred.projects.investor.Controllers;
 
 import alfred.projects.investor.Model.Ticker;
 import alfred.projects.investor.Model.WrapperTickerResponse;
-import alfred.projects.investor.Proxy.FeignClient;
+import alfred.projects.investor.Proxy.FeignClientStockApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,12 +13,12 @@ import java.util.List;
 @RestController
 public class StocksController {
 
-    private FeignClient feignStockProxy;
+    private FeignClientStockApi feignStockProxy;
 
     @Value("${token}")
     private String token;
 
-    public StocksController(FeignClient feignStockProxy) {
+    public StocksController(FeignClientStockApi feignStockProxy) {
         this.feignStockProxy = feignStockProxy;
     }
 
