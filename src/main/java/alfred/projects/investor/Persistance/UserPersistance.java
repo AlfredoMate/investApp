@@ -4,8 +4,6 @@ import alfred.projects.investor.Model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 @Repository
 public class UserPersistance {
