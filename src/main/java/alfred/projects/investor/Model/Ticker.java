@@ -4,9 +4,11 @@ public class Ticker {
 
     private Float close;
 
-    public Ticker() {}
+    public Float getClose() {
+        return close;
+    }
 
-    public Ticker(Float close) {
+    public void setClose(Float close) {
         this.close = close;
     }
 }
