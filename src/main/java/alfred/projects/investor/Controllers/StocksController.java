@@ -4,6 +4,7 @@ import alfred.projects.investor.Model.Ticker;
 import alfred.projects.investor.Model.WrapperTickerResponse;
 import alfred.projects.investor.Proxy.FeignClientStockApi;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
