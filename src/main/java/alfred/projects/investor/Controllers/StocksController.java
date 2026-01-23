@@ -1,13 +1,13 @@
 package alfred.projects.investor.Controllers;
 
+import alfred.projects.investor.Model.Session;
 import alfred.projects.investor.Model.Ticker;
 import alfred.projects.investor.Model.WrapperTickerResponse;
+import alfred.projects.investor.Persistance.SessionPersistance;
 import alfred.projects.investor.Proxy.FeignClientStockApi;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,18 +15,22 @@ import java.util.List;
 public class StocksController {
 
     private FeignClientStockApi feignStockProxy;
+    private SessionPersistance sessionPersistance;
 
     @Value("${token}")
     private String token;
 
-    public StocksController(FeignClientStockApi feignStockProxy) {
+    public StocksController(FeignClientStockApi feignStockProxy, SessionPersistance sessionPersistance) {
         this.feignStockProxy = feignStockProxy;
+        this.sessionPersistance = sessionPersistance;
     }
 
     @GetMapping("/data")
-    public List<Ticker> getEODStockData (@RequestParam String ticker) {
+    public ResponseEntity<List<Ticker>>  getEODStockData (@CookieValue(name = "SESSIONID") String sessionId, @RequestParam String ticker) {
         String dateFrom = "2025-01-01";
         WrapperTickerResponse response = feignStockProxy.obtainEODdata(ticker, token, dateFrom);
-        return response.getData();
+        Session currentSession = sessionPersistance.getSession(sessionId);
+        String currentUserName = currentSession.getUserName();
+        return ResponseEntity.ok().header("UserName", currentUserName).body(response.getData());
     }
 }

@@ -17,7 +17,8 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .exposedHeaders("Username");
     }
 
 }
