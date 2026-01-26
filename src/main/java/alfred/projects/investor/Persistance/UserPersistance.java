@@ -1,5 +1,6 @@
 package alfred.projects.investor.Persistance;
 
+import alfred.projects.investor.Service.HashingService;
 import org.springframework.stereotype.Repository;
 
 
@@ -10,29 +11,29 @@ import java.util.Map;
 public class UserPersistance {
     private Map<String, String> users = new HashMap<>();
 
-    public Boolean addUser (String username, String password) {
+    public void addUser (String username, String password) {
 
-        if (userExists(username)) {
-            return true;
+        if (chechUserExists(username)) {
+            throw UserAlreadyExists.from(username);
         }
        users.put(username, password);
-        return false;
     }
 
-    public boolean userExists (String username) {
+    public boolean chechUserExists(String username) {
         return users.containsKey(username);
     }
 
     public void testUserExists (String username) {
-        if (!userExists(username)) {
+        if (!chechUserExists(username)) {
             throw UserDoesntExist.from(username);
         }
     }
 
     public void testCredentials (String username, String password) {
-        userExists(username);
+        chechUserExists(username);
 
-        boolean correctPassword =  users.get(username).equals(password);
+        String hashedPasswordStored = users.get(username);
+        boolean correctPassword = HashingService.comparePassword(password, hashedPasswordStored);
         if (!correctPassword) {
             throw IncorrectPasswordException.from(username);
         }
