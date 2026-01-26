@@ -1,8 +1,8 @@
 package alfred.projects.investor.Controllers;
 
-import alfred.projects.investor.Business.LoginProcessor;
 import alfred.projects.investor.Model.Session;
 import alfred.projects.investor.Persistance.SessionPersistance;
+import alfred.projects.investor.Persistance.UserPersistance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -18,13 +18,14 @@ import java.util.UUID;
 @RestController
 public class LoginController {
 
-    private LoginProcessor loginProcessor;
     private SessionPersistance sessionPersistance;
+    private UserPersistance userPersistance;
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    public LoginController (LoginProcessor loginProcessor, SessionPersistance sessionPersistance) {
-        this.loginProcessor = loginProcessor;
+    public LoginController (SessionPersistance sessionPersistance, UserPersistance userPersistance) {
+
         this.sessionPersistance = sessionPersistance;
+        this.userPersistance = userPersistance;
     }
 
     @PostMapping("/login")
@@ -32,9 +33,7 @@ public class LoginController {
             @RequestHeader("Username") String username,
             @RequestHeader ("Password") String password) {
         logger.info("This method was called with :{}, {}", username, password);
-        loginProcessor.setUsername(username);
-        loginProcessor.setPassword(password);
-        boolean isLoginValid = loginProcessor.isLoginValid();
+        boolean isLoginValid = userPersistance.testCredentials(username, password);
 
         if (!isLoginValid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
