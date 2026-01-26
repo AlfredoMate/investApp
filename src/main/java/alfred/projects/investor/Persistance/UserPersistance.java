@@ -23,10 +23,18 @@ public class UserPersistance {
         return users.containsKey(username);
     }
 
-    public boolean testCredentials (String username, String password) {
+    public void testUserExists (String username) {
         if (!userExists(username)) {
-            return false;
+            throw UserDoesntExist.from(username);
         }
-        return users.get(username).equals(password);
+    }
+
+    public void testCredentials (String username, String password) {
+        userExists(username);
+
+        boolean correctPassword =  users.get(username).equals(password);
+        if (!correctPassword) {
+            throw IncorrectPasswordException.from(username);
+        }
     }
 }
