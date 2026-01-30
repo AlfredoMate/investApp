@@ -1,6 +1,7 @@
 package alfred.projects.investor.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -19,11 +20,9 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Value("${spring.datasource.url}")
     private String jdbcUrl;
 
-    @Value("${spring.datasource.username}")
-    private String username;
 
-    @Value("${spring.datasource.password}")
-    private String password;
+
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -37,6 +36,9 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Bean
     public DataSource dataSource () {
+        Dotenv dotenv = Dotenv.load();
+        String username = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setJdbcUrl(jdbcUrl);
         hikariDataSource.setUsername(username);
