@@ -1,6 +1,5 @@
 package alfred.projects.investor.Service;
 
-import alfred.projects.investor.Model.Session;
 import alfred.projects.investor.Persistance.*;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class LoginService {
         this.userRepository = userRepository;
     }
 
-    public void login (String username, String password, String sessionId) {
+    public void login (String username, String password) {
 
         if (!userRepository.existsUserByUsername(username)) {
             throw UserDoesntExist.from(username);
@@ -26,6 +25,5 @@ public class LoginService {
         if (!HashingService.comparePassword(password, userToLogin.getPassword())) {
             throw IncorrectPasswordException.from(userToLogin.getUsername());
         }
-        sessionPersistance.addSession(sessionId, Session.from(username));
     }
 }
