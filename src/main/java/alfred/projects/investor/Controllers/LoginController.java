@@ -1,13 +1,8 @@
 package alfred.projects.investor.Controllers;
 
-import alfred.projects.investor.Model.Session;
-import alfred.projects.investor.Persistance.SessionPersistance;
-import alfred.projects.investor.Persistance.UserPersistance;
+
 import alfred.projects.investor.Service.LoginService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
