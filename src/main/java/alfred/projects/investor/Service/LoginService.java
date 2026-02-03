@@ -6,14 +6,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
 
-    private SessionPersistance sessionPersistance;
     private UserRepository userRepository;
+    private HashingService hashingService;
 
+    public LoginService (UserRepository userRepository, HashingService hashingService) {
 
-    public LoginService (SessionPersistance sessionPersistance,
-    UserRepository userRepository) {
-        this.sessionPersistance = sessionPersistance;
         this.userRepository = userRepository;
+        this.hashingService = hashingService;
     }
 
     public void login (String username, String password) {
@@ -22,7 +21,7 @@ public class LoginService {
             throw UserDoesntExist.from(username);
         }
         User userToLogin = userRepository.findUsersByUsername(username);
-        if (!HashingService.comparePassword(password, userToLogin.getPassword())) {
+        if (!hashingService.comparePassword(password, userToLogin.getPassword())) {
             throw IncorrectPasswordException.from(userToLogin.getUsername());
         }
     }
