@@ -1,4 +1,4 @@
-package alfred.projects.investor.Controller;
+package alfred.projects.investor.unit.Controller;
 
 import alfred.projects.investor.Controllers.StocksController;
 import alfred.projects.investor.Model.Session;

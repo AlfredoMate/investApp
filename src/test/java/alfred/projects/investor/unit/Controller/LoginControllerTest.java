@@ -1,4 +1,4 @@
-package alfred.projects.investor.Controller;
+package alfred.projects.investor.unit.Controller;
 
 import alfred.projects.investor.Controllers.LoginController;
 import alfred.projects.investor.Service.LoginService;

@@ -1,7 +1,8 @@
-package alfred.projects.investor.Service;
+package alfred.projects.investor.unit.Service;
 
 import alfred.projects.investor.Model.Session;
 import alfred.projects.investor.Persistance.SessionPersistance;
+import alfred.projects.investor.Service.SessionService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
