@@ -1,8 +1,10 @@
-package alfred.projects.investor.Service;
+package alfred.projects.investor.unit.Service;
 
 import alfred.projects.investor.Persistance.User;
 import alfred.projects.investor.Persistance.UserAlreadyExists;
 import alfred.projects.investor.Persistance.UserRepository;
+import alfred.projects.investor.Service.HashingService;
+import alfred.projects.investor.Service.RegisterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,9 +1,11 @@
-package alfred.projects.investor.Service;
+package alfred.projects.investor.unit.Service;
 
 import alfred.projects.investor.Persistance.IncorrectPasswordException;
 import alfred.projects.investor.Persistance.User;
 import alfred.projects.investor.Persistance.UserDoesntExist;
 import alfred.projects.investor.Persistance.UserRepository;
+import alfred.projects.investor.Service.HashingService;
+import alfred.projects.investor.Service.LoginService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
