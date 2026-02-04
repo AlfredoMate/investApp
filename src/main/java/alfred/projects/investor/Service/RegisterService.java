@@ -9,16 +9,18 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
 
     private UserRepository userRepository;
+    private HashingService hashingService;
 
-    public RegisterService (UserRepository userRepository) {
+    public RegisterService (UserRepository userRepository, HashingService hashingService) {
 
         this.userRepository = userRepository;
+        this.hashingService = hashingService;
 
     }
 
     public void registerLogic (String username, String password) {
 
-        String hashedPassword = HashingService.hashPassword(password);
+        String hashedPassword = hashingService.hashPassword(password);
 
         if (userRepository.existsUserByUsername(username)) {
             throw UserAlreadyExists.from(username);
