@@ -21,7 +21,7 @@ jobs:
       - name: Start MySql
         run: |
           sudo /etc/init.d/mysql start
-          mysql -e "CREATE DATABASE IF NOT EXISTS investor_db;" -u$DB_USERNAME -p$DB_PASSWORD
+          mysql -u root -e "CREATE DATABASE IF NOT EXISTS investor_db;"
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
