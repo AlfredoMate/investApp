@@ -19,9 +19,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Start MySql
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql -u root -e "CREATE DATABASE IF NOT EXISTS investor_db;"
+        run: sudo /etc/init.d/mysql start
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
