@@ -19,7 +19,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Start MySql
-        run: sudo systemctl start mysql.service
+        run: | 
+          sudo systemctl start mysql.service
+          mysql -e 'CREATE DATABASE investor_db;' -u${{ env.DB_USERNAME }} -p${{ env.DB_PASSWORD }}
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
