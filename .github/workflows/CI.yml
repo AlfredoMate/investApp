@@ -4,6 +4,9 @@ on:
     branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main", "dev" ]
+env:
+  DB_USERNAME: ${{secrets.DB_USERNAME}}
+  DB_PASSWORD: ${{secrets.DB_PASSWORD}}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +18,14 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      - name: Start MySql
+        uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: "8.0"
+      - run: |
+         mysql -u root -e "CREATE DATABASE IF NOT EXISTS investor_db;"
+         mysql -u root -e "CREATE USER '${DB_USERNAME}'@'%' IDENTIFIED BY '${DB_PASSWORD}';"
+         mysql -u root -e "GRANT ALL PRIVILEGES ON investor_db.* TO '${DB_USERNAME}'@'%';"
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 

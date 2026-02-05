@@ -34,7 +34,7 @@ public class ProjectConfig implements WebMvcConfigurer {
                 .exposedHeaders("Username");
     }
 
-    @Bean
+    /*@Bean
     public DataSource dataSource () {
         Dotenv dotenv = Dotenv.load();
         String username = dotenv.get("DB_USER");
@@ -44,6 +44,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         hikariDataSource.setUsername(username);
         hikariDataSource.setPassword(password);
         return hikariDataSource;
-    }
+    }*/
 
 }
