@@ -36,4 +36,4 @@ build/
 .env
 
 #Profiles
-src/main/resources/application-local.properties
+/src/main/resources/application-local.properties
