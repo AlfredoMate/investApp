@@ -1,7 +1,9 @@
 package alfred.projects.investor.Persistance;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
+@Table("person")
 public class User {
 
     @Id
