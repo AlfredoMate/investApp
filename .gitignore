@@ -37,3 +37,6 @@ build/
 
 #Profiles
 /src/main/resources/application-local.properties
+
+#Docker
+docker-compose.yml

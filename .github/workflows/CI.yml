@@ -7,6 +7,7 @@ on:
 env:
   DB_USERNAME: ${{secrets.DB_USERNAME}}
   DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+  DB_HOST: ${{secrets.DB_HOST}}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,9 +27,7 @@ jobs:
          mysql -u root -e "CREATE DATABASE IF NOT EXISTS investor_db;"
          mysql -u root -e "CREATE USER '${DB_USERNAME}'@'%' IDENTIFIED BY '${DB_PASSWORD}';"
          mysql -u root -e "GRANT ALL PRIVILEGES ON investor_db.* TO '${DB_USERNAME}'@'%';"
-      - name: Build and run unit tests
-        run: mvn -B package --file pom.xml
-      - name: Run integration tests
-        run: mvn -B verify -Dspring.profile.active=local
+      - name: Build, unit and integration tests
+        run: mvn -B verify
 
 
