@@ -29,6 +29,6 @@ jobs:
       - name: Build and run unit tests
         run: mvn -B package --file pom.xml
       - name: Run integration tests
-        run: mvn -B verify -Dspring.profile.active=local
+        run: mvn -B verify
 
 
