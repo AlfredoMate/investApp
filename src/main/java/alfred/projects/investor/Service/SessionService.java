@@ -27,10 +27,10 @@ public class SessionService {
     public ResponseCookie createCookie(String sessionId) {
         return ResponseCookie.from("SESSIONID", sessionId)
                 .httpOnly(true)
-                .secure(true)
+                .secure(false)
                 .path("/")
                 .maxAge(60*60)
-                .sameSite("None")
+                .sameSite("Lax")
                 .build();
     }
 
